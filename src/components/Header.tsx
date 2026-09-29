@@ -21,7 +21,10 @@ const ICON_BUTTON =
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const pathname = usePathname();
+  // `trailingSlash: true` (static export) makes paths like "/about-us/"; strip it to match NAV_LINKS.
+  const rawPathname = usePathname();
+  const pathname =
+    rawPathname.length > 1 ? rawPathname.replace(/\/+$/, "") : rawPathname;
   const { cartCount, wishlist, setCartOpen } = useStore();
 
   return (
